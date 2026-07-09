@@ -1,0 +1,17 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # allow static files to load normally
+    RewriteRule ^.*\.(js|css|png|jpg|jpeg|svg|ico|gif|json|map)$ - [L,NC]
+
+    # serve real files & directories normally
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    RewriteRule ^index\.html$ - [L]
+
+    # SPA fallback
+    RewriteRule . /index.html [L]
+</IfModule>
